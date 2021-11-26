@@ -78,11 +78,11 @@ var sumTotal = function(products) {
 // exampleOutput: { dessertType: 3, dessertType2: 1 }
 var dessertCategories = function(desserts) {
 
-  return _.reduce(desserts, function(accumulator, dessert, idx, desserts) {
-    if (accumulator[dessert] === undefined) {
-      accumulator[dessert] = 1;
+  return _.reduce(desserts, function(accumulator, type, idx, desserts) {
+    if (accumulator[desserts[idx].type] === undefined) {
+      accumulator[desserts[idx].type] = 1;
     } else {
-      accumulator[dessert]++;
+      accumulator[desserts[idx].type]++;
     }
     return accumulator;
   }, {});

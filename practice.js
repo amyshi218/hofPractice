@@ -177,13 +177,13 @@ var glutenFree = function(desserts) {
 
 */
 var applyCoupon = function(groceries, coupon) {
-  return _.map(groceries, function(price, idx, groceries) {
-    var priceNum = groceries[idx].price.substring(1);
+  var result = _.map(groceries, function(item, idx, groceries) {
+    var priceNum = Number(groceries[idx].price.substring(1));
     var percent = 1 - coupon;
-
-    var saleNum = (parseFloat(priceNum) * percent).toFixed(2);
-    groceries[idx].salePrice = '$' + saleNum.toString();
-    console.log(groceries)
-    return groceries;
+    var saleNum = (priceNum * percent).toFixed(2);
+    item.salePrice = '$' + saleNum;
+    return item;
   });
+  console.log(result)
+  return result;
 };

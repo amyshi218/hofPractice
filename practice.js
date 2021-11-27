@@ -140,20 +140,20 @@ var upperCaseFruits = function(fruits) {
 // that have a new "glutenFree" property, with a boolean value.
 // TIP: Items that contain flour are not gluten-free.
 var glutenFree = function(desserts) {
-  return _.map(desserts, function(ingredients, idx, desserts) {
+  var result = _.map(desserts, function(dessert, idx, desserts) {
     // if index of flour is -1
       //desserts idx key glutenFree is true
     //else
       //dessert idx key glutenFree is false
 
-    if (desserts[idx].ingredients.includes('flour')) {
-      desserts[idx].glutenFree = 'true';
+    if (dessert.ingredients.includes('flour')) {
+      dessert.glutenFree = 'false';
     } else {
-      desserts[idx].glutenFree = 'false';
+      dessert.glutenFree = 'true';
     }
-    return desserts;
+    return dessert;
   });
-
+  return result;
 };
 
 // use _.map to return an array of items with their sale prices, with a new property

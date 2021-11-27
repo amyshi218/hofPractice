@@ -104,25 +104,22 @@ var ninetiesKid = function(movies) {
 // runtime than your time limit.
 // timeLimit is an integer representing a number of minutes.
 var movieNight = function(movies, timeLimit) {
-  return _.reduce(movies, function(memo, runtime, idx, movies) {
+  var result = _.reduce(movies, function(memo, runtime, idx, movies) {
     if (movies[idx].runtime <= timeLimit) {
-      if (memo.true === undefined) {
-        memo.true = 1;
-      } else {
-        memo.true++;
-      }
-
+      memo.true++;
     } else {
       if (movies[idx].runtime > timeLimit) {
-        if (memo.false === undefined) {
-          memo.false = 1;
-        } else {
-          memo.false++;
-        }
+        memo.false++;
       }
     }
-    return memo.true >= 1;
-  }, {});
+    return memo;
+  }, { true: 0, false: 0 });
+
+  if (result.true > 0) {
+    return true;
+  } else {
+    return false;
+  }
 };
 
 /*
@@ -143,6 +140,19 @@ var upperCaseFruits = function(fruits) {
 // that have a new "glutenFree" property, with a boolean value.
 // TIP: Items that contain flour are not gluten-free.
 var glutenFree = function(desserts) {
+  return _.map(desserts, function(ingredients, idx, desserts) {
+    // if index of flour is -1
+      //desserts idx key glutenFree is true
+    //else
+      //dessert idx key glutenFree is false
+
+    if (desserts[idx].ingredients.includes('flour')) {
+      desserts[idx].glutenFree = 'true';
+    } else {
+      desserts[idx].glutenFree = 'false';
+    }
+    return desserts;
+  });
 
 };
 
@@ -167,5 +177,13 @@ var glutenFree = function(desserts) {
 
 */
 var applyCoupon = function(groceries, coupon) {
+  return _.map(groceries, function(price, idx, groceries) {
+    var priceNum = groceries[idx].price.substring(1);
+    var percent = 1 - coupon;
 
+    var saleNum = (parseFloat(priceNum) * percent).toFixed(2);
+    groceries[idx].salePrice = '$' + saleNum.toString();
+    console.log(groceries)
+    return groceries;
+  });
 };
